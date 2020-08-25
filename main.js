@@ -29,13 +29,13 @@ console.log(" ///// fonction Validate Cred /////")
 
 const validateCred = function (array) {
 
-    // console.log(array);
-    // crée une copie du tableau et l'inverse, et enlève le chiffre le plus à gauche (anciennement le plus à droite)
+    console.log(array);
+    //crée une copie du tableau et l'inverse, et enlève le chiffre le plus à gauche (anciennement le plus à droite)
     let modifiedArray = array.reverse();
-    // console.log(" copie, inversion " + modifiedArray); 
+    console.log(" copie, inversion " + modifiedArray); 
 
     modifiedArray = modifiedArray.splice(1);
-    // console.log(" retrait du premier chiffre: " + modifiedArray); 
+    console.log(" retrait du premier chiffre: " + modifiedArray); 
    
     // double chaque element du tableau
     modifiedArray = modifiedArray.map((element, index) => {
@@ -55,17 +55,17 @@ const validateCred = function (array) {
         }
     );
     
-    // console.log(" chaque element restant dans le tableau est doublé et si il est > 9, on lui enlève 9: " + modifiedArray);
+    console.log(" chaque element restant dans le tableau est doublé et si il est > 9, on lui enlève 9: " + modifiedArray);
      
     // ajoute le dernier element du array original au modified array
     modifiedArray = modifiedArray.concat(array[array.length - 1]);    
-    // console.log( "modifiedArray auquel on rajoute le dernier element de array :" + modifiedArray);
+    console.log( "modifiedArray auquel on rajoute le dernier element de array :" + modifiedArray);
 
     // // fait la somme de tous les chiffres du tableau
     const add = function (a,b) {return a + b}; 
     let reducedValue = modifiedArray.reduce(add);
     let initialReducedValue = array.reduce(add);
-    // console.log(" valeur somme de tous les chiffres du tableau " + reducedValue);    
+    console.log(" valeur somme de tous les chiffres du tableau " + reducedValue);    
 
     // la somme modulo 10
     if (reducedValue % 10 === 0) {
@@ -76,12 +76,7 @@ const validateCred = function (array) {
         
 };
 
-batch.forEach((array) => {
-    const isSuccess = validateCred(array);
-    console.log(isSuccess);
-});
-
-console.log(validateCred(valid2));
+console.log("la fonction renvoie : " + validateCred(valid1));
 
 
 console.log(" ///// fonction Find Invalid Card /////");
