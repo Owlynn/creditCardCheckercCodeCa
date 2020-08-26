@@ -29,8 +29,8 @@ const validateCred = function (array) {
     //crée une copie du tableau et l'inverse, et enlève le chiffre le plus à gauche (anciennement le plus à droite)
     let modifiedArray = array.slice(0);
     modifiedArray = modifiedArray.reverse();
-    console.log("array :", array);
-    console.log("modifiedArray :", modifiedArray);
+    // console.log("array :", array);
+    // console.log("modifiedArray :", modifiedArray);
 
     modifiedArray = modifiedArray.splice(1);
     // console.log(" retrait du premier chiffre: " + modifiedArray); 
@@ -81,32 +81,77 @@ const validateCred = function (array) {
 console.log(" ///// fonction Find Invalid Card /////");
 
 const findInvalidCards = (nestedArray) => {
-
+    
     let invalidArray = [];
-    console.log("InvalidArray en début de fonction : ", invalidArray);
-    console.log("nestedArray :", nestedArray);
-
+    // console.log("InvalidArray en début de fonction : ", invalidArray);
+    // console.log("nestedArray :", nestedArray);
+    
     nestedArray.forEach(currentArray => {
-
-        console.log("current Array through loop ", currentArray);
-
+        
+        // console.log("current Array through loop ", currentArray);
+        
         const testing = validateCred(currentArray);
-        console.log("current Array through loop ", currentArray);
-        console.log("résultat du test : ", testing);
-
+        // console.log("current Array through loop ", currentArray);
+        // console.log("résultat du test : ", testing);
+        
         if (!testing) {
-            console.log("currentArray (dans if) :", currentArray);
+            // console.log("currentArray (dans if) :", currentArray);
             invalidArray.push(currentArray);
         }
-
-        console.log("InvalidArray en fin de boucle ", invalidArray);
+        
     })
+    console.log("InvalidArray en fin de fonction ", invalidArray);
     return invalidArray; 
 };
 
-console.log(findInvalidCards(batch));
+// console.log(findInvalidCards(batch));
 
-// Create another function, findInvalidCards() that has one parameter for a nested array of credit card numbers. The role of findInvalidCards() is to check through the nested array for which numbers are invalid, and return another nested array of invalid cards.
-// 
+
+console.log(" ///// fonction ID companies /////");
+
+const idInvalidCardCompanies = (nestedArray) => {
+    
+
+    let companyArray = [];
+
+    nestedArray.forEach ( element => {
+        console.log("current element : ", element );
+        let firstDigit = element[0];
+        console.log("first digit of the array" , firstDigit);
+       
+
+            if (firstDigit !== 3 && firstDigit !== 4 && firstDigit !== 5 && firstDigit !== 6   ) {
+
+                console.log("Company not found");
+            }
+            
+            switch (firstDigit) {
+                case 3 : companyArray.push("Amex");
+                break;
+
+                case 4 : companyArray.push("Visa");
+                break;
+
+                case 5 : companyArray.push("Mastercard");
+                break;
+
+                case 6 : companyArray.push("Discover");
+                break;
+
+                default : "Company not found"
+            }
+
+    })
+
+    console.log("company array", companyArray)
+    let finalCompanyArray = new Set(companyArray);
+    console.log("company array après le set", finalCompanyArray)
+    return finalCompanyArray;
+
+};
+
+console.log(idInvalidCardCompanies(findInvalidCards(batch)));
+
+
 
 
