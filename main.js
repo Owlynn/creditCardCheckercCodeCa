@@ -22,20 +22,18 @@ const mystery5 = [4, 9, 1, 3, 5, 4, 0, 4, 6, 3, 0, 7, 2, 5, 2, 3];
 // An array of all the arrays above
 const batch = [valid1, valid2, valid3, valid4, valid5, invalid1, invalid2, invalid3, invalid4, invalid5, mystery1, mystery2, mystery3, mystery4, mystery5]
 
-
-// Add your functions below:
-
-console.log(" ///// fonction Validate Cred /////")
+// console.log(" ///// fonction Validate Cred /////")
 
 const validateCred = function (array) {
 
-    console.log(array);
     //crée une copie du tableau et l'inverse, et enlève le chiffre le plus à gauche (anciennement le plus à droite)
-    let modifiedArray = array.reverse();
-    console.log(" copie, inversion " + modifiedArray); 
+    let modifiedArray = array.slice(0);
+    modifiedArray = modifiedArray.reverse();
+    console.log("array :", array);
+    console.log("modifiedArray :", modifiedArray);
 
     modifiedArray = modifiedArray.splice(1);
-    console.log(" retrait du premier chiffre: " + modifiedArray); 
+    // console.log(" retrait du premier chiffre: " + modifiedArray); 
    
     // double chaque element du tableau
     modifiedArray = modifiedArray.map((element, index) => {
@@ -55,17 +53,18 @@ const validateCred = function (array) {
         }
     );
     
-    console.log(" chaque element restant dans le tableau est doublé et si il est > 9, on lui enlève 9: " + modifiedArray);
+    // console.log(" chaque element restant dans le tableau est doublé et si il est > 9, on lui enlève 9: " + modifiedArray);
      
     // ajoute le dernier element du array original au modified array
     modifiedArray = modifiedArray.concat(array[array.length - 1]);    
-    console.log( "modifiedArray auquel on rajoute le dernier element de array :" + modifiedArray);
-
+    // console.log( "modifiedArray auquel on rajoute le dernier element de array :" + modifiedArray);
+    
     // // fait la somme de tous les chiffres du tableau
     const add = function (a,b) {return a + b}; 
     let reducedValue = modifiedArray.reduce(add);
-    let initialReducedValue = array.reduce(add);
-    console.log(" valeur somme de tous les chiffres du tableau " + reducedValue);    
+    // let initialReducedValue = array.reduce(add);
+    // console.log(" valeur somme de tous les chiffres du tableau " + reducedValue);    
+    // console.log( "modifiedArray après réduction du tableau: " + reducedValue); 
 
     // la somme modulo 10
     if (reducedValue % 10 === 0) {
@@ -76,7 +75,7 @@ const validateCred = function (array) {
         
 };
 
-console.log("la fonction renvoie : " + validateCred(valid1));
+// console.log("la fonction renvoie : " + validateCred(valid1));
 
 
 console.log(" ///// fonction Find Invalid Card /////");
@@ -84,27 +83,30 @@ console.log(" ///// fonction Find Invalid Card /////");
 const findInvalidCards = (nestedArray) => {
 
     let invalidArray = [];
-    console.log(" invalidArray au début de la fonction " + invalidArray)
+    console.log("InvalidArray en début de fonction : ", invalidArray);
+    console.log("nestedArray :", nestedArray);
 
-    nestedArray.forEach( (arrayElement) => {
-        console.log("arrayElement: " + arrayElement);
-        const testing = validateCred(arrayElement);
-        console.log("testing: " + testing);
+    nestedArray.forEach(currentArray => {
+
+        console.log("current Array through loop ", currentArray);
+
+        const testing = validateCred(currentArray);
+        console.log("current Array through loop ", currentArray);
+        console.log("résultat du test : ", testing);
 
         if (!testing) {
-            invalidArray.push(arrayElement);
+            console.log("currentArray (dans if) :", currentArray);
+            invalidArray.push(currentArray);
         }
-                   
-        console.log("invalidArray à la fin de la fonction " + invalidArray);
-        
+
+        console.log("InvalidArray en fin de boucle ", invalidArray);
     })
-            return invalidArray;
-        
+    return invalidArray; 
 };
 
 console.log(findInvalidCards(batch));
 
 // Create another function, findInvalidCards() that has one parameter for a nested array of credit card numbers. The role of findInvalidCards() is to check through the nested array for which numbers are invalid, and return another nested array of invalid cards.
-
+// 
 
 
